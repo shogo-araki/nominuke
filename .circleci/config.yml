@@ -21,7 +21,9 @@ jobs:
       - run: pwd
       - restore_cache:
           key: composer-v1-{{ checksum "./src/project/composer.lock" }}
-      - run: composer install -n --prefer-dist
+      - run: |
+          cd src/project
+          composer install -n --prefer-dist
       - save_cache:
           key: composer-v1-{{ checksum "./src/project/composer.lock" }}
           paths:
