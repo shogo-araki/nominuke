@@ -17,8 +17,6 @@ jobs:
     steps:
       - checkout
       - run: sudo composer self-update --1
-      - run: ls src
-      - run: pwd
       - restore_cache:
           key: composer-v1-{{ checksum "./src/project/composer.lock" }}
       - run: |
@@ -44,4 +42,6 @@ jobs:
       - run: |
           cd src/project
           npm run dev
-      - run: ./src/project/vendor/bin/phpunit
+      - run: |
+          cd src/project
+          vendor/bin/phpunit
