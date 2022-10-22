@@ -33,6 +33,7 @@ jobs:
       - run:
           name: npm ci
           command: |
+            cd src/project
             if [ ! -d ./src/project/node_modules ]; then
               npm ci
             fi
@@ -40,5 +41,7 @@ jobs:
           key: npm-v1-{{ checksum "./src/project/package-lock.json" }}
           paths:
             - ./src/project/node_modules
-      - run: npm run dev
+      - run: |
+          cd src/project
+          npm run dev
       - run: ./src/project/vendor/bin/phpunit
