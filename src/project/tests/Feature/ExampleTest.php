@@ -4,18 +4,28 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Models\User;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function test_example()
-    {
-        $response = $this->get('/');
+    use DatabaseMigrations;
 
-        $response->assertStatus(200);
+    /** @test */
+    public function DB接続確認()
+    {
+        // テスト用ユーザーの生成
+        User::create([
+            'name' => 'testTaro',
+            'email' => 'example777@mail.com',
+            'password' => "testPass"
+        ]);
+
+        // 作成したユーザーがdbにあるかチェック
+        $this->assertDatabaseHas('users', [
+            'name' => 'testTaro',
+            'email' => 'example777@mail.com',
+            'password' => "testPass"
+        ]);
     }
 }
