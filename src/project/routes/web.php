@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('/', [App\Http\Controllers\SoundController::class, 'index']);
