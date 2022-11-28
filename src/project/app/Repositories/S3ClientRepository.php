@@ -29,7 +29,7 @@ class S3ClientRepository implements FetchDataRepositoryInterface
         ]);
     }
 
-    public function fetchObject(string $path, string $saveAs)
+    public function fetchObject(string $path)
     {
         $params = [
             'Bucket' => $this->bucket,
@@ -37,10 +37,16 @@ class S3ClientRepository implements FetchDataRepositoryInterface
         ];
 
         try {
-            return $result = $this->s3->getObject($params);
-
+            return $this->s3->getObject($params);
         } catch (S3Exception $e) {
             throw $e->getMessage();
         }
     }
+
+    // public function fetchObjectList(string $category){
+    //     $s3_list = $this->s3->ListObjects([
+    //         'Bucket' => 'xxxxxxxxxx',//バケット名
+    //         'Prefix' => $s3_dir,//ファイル指定
+    //     ]);
+    // }
 }

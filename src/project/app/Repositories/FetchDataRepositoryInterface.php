@@ -4,5 +4,5 @@ namespace App\Repositories;
 
 interface FetchDataRepositoryInterface
 {
-    public function fetchObject(string $path, string $saveAs);
+    public function fetchObject(string $path);
 }

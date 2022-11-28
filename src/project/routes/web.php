@@ -18,4 +18,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/', [App\Http\Controllers\SoundController::class, 'index']);
+Route::get('/', App\Http\Controllers\IndexController::class);
+Route::get('/sound', [App\Http\Controllers\Sound\SoundController::class, 'index']);
+Route::get('/sound/add', [App\Http\Controllers\Sound\SoundController::class, 'add']);
+Route::post('/sound/add', [App\Http\Controllers\Sound\SoundController::class, 'store']);

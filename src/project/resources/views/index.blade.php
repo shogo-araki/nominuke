@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-top page
+<a href="/sound">sound</a>
 @endsection

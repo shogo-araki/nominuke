@@ -4,5 +4,5 @@ namespace App\Services;
 
 interface GetDataServiceInterface
 {
-    public function getSoundsData();
+    public function getSoundsData(string $path);
 }

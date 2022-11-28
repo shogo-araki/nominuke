@@ -13,9 +13,8 @@ class S3GetDataService implements GetDataServiceInterface
         $this->s3_object = $s3_object;
     }
 
-    public function getSoundsData()
+    public function getSoundsData(string $path)
     {
-        // 後で動的にファイル名を変えられるようにする
-        return $this->s3_object->fetchObject('clapolka.mp3', 'clapolka.mp3');
+        return $this->s3_object->fetchObject($path);
     }
 }
