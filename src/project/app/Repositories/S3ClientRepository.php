@@ -8,8 +8,8 @@ use Aws\S3\Exception\S3Exception;
 
 class S3ClientRepository implements FetchDataRepositoryInterface
 {
-    public $s3;
-    public $bucket;
+    private $s3;
+    private $bucket;
 
     public function __construct()
     {
