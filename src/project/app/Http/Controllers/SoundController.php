@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\GetDataServiceInterface;
+use Illuminate\Support\Facades\Storage;
 
 class SoundController extends Controller
 {
@@ -16,7 +17,8 @@ class SoundController extends Controller
     public function index()
     {
         $sound = $this->getData->getSoundsData();
-        dd($sound);
+        Storage::put('aaa.mp3', $sound['Body']);
+        dd($sound['Body']);
         return view('index', [$sound]);
     }
 }
