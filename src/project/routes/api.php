@@ -19,3 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/getSound', [App\Http\Controllers\Sound\SoundApiController::class, 'getSound']);
+Route::get('/getSoundList', [App\Http\Controllers\Sound\SoundApiController::class, 'getSoundList']);

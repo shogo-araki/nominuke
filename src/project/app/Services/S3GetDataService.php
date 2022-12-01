@@ -17,4 +17,9 @@ class S3GetDataService implements GetDataServiceInterface
     {
         return $this->s3_object->fetchObject($path);
     }
+
+    public function getSoundList()
+    {
+        return $this->s3_object->fetchObjectList();
+    }
 }

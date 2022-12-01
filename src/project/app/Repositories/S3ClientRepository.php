@@ -43,10 +43,15 @@ class S3ClientRepository implements FetchDataRepositoryInterface
         }
     }
 
-    // public function fetchObjectList(string $category){
-    //     $s3_list = $this->s3->ListObjects([
-    //         'Bucket' => 'xxxxxxxxxx',//バケット名
-    //         'Prefix' => $s3_dir,//ファイル指定
-    //     ]);
-    // }
+    public function fetchObjectList()
+    {
+        try {
+            return $this->s3->ListObjects([
+                'Bucket' => $this->bucket,
+                // 'Prefix' => ,
+            ]);
+        } catch (S3Client $e) {
+            throw $e->getMessage();
+        }
+    }
 }
