@@ -25,9 +25,8 @@ sound page
 
     const sound_list = document.getElementById('sound_list');
     sound_list.addEventListener('click', (e) => {
-        playSound(e).then(data => {
-            console.log(data)
-            let sound = new Audio(data);
+        playSound(e).then(musicPath => {
+            let sound = new Audio(musicPath);
             sound.play();
         });
     });
