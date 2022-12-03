@@ -18,12 +18,11 @@ class SoundApiController extends Controller
 
     public function getSound(Request $request)
     {
-        // 再生できるようにする
         if (!Storage::exists($request->path)) {
             $sound = $this->getData->getSoundsData($request->path)['Body'];
             Storage::put($request->path, $sound);
         }
-        return Storage::get($request->path);
+        return response()->json(url('/storage') . '/' . $request->path);
     }
 
     public function getSoundList()

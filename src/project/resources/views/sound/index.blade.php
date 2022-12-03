@@ -18,7 +18,6 @@ sound page
                 el.ref = "#";
                 el.className = 'sound';
                 el.dataset.sound = item;
-                console.log(sound_list);
                 sound_list.appendChild(el);
             });
         });
@@ -27,7 +26,9 @@ sound page
     const sound_list = document.getElementById('sound_list');
     sound_list.addEventListener('click', (e) => {
         playSound(e).then(data => {
-
+            console.log(data)
+            let sound = new Audio(data);
+            sound.play();
         });
     });
 
@@ -48,9 +49,7 @@ sound page
             body: form
         });
         const json = await response.json();
-
-        let sound = new Audio(json);
-        sound.play();
+        return json;
     }
 </script>
 
