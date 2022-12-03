@@ -20,7 +20,7 @@ class SoundApiController extends Controller
     {
         if (!Storage::exists($request->path)) {
             $sound = $this->getData->getSoundsData($request->path)['Body'];
-            Storage::put($request->path, $sound);
+            Storage::disk('public')->put($request->path, $sound);
         }
         return response()->json(url('/storage') . '/' . $request->path);
     }
