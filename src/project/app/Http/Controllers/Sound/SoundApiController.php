@@ -27,7 +27,6 @@ class SoundApiController extends Controller
 
     public function getSoundList()
     {
-        $data = $this->getData->getSoundList()['Contents'];
-        return $data;
+        return $this->getData->getSoundList()['Contents'];
     }
 }
