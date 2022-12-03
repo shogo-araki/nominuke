@@ -48,7 +48,7 @@ class S3ClientRepository implements FetchDataRepositoryInterface
         try {
             return $this->s3->ListObjects([
                 'Bucket' => $this->bucket,
-                // 'Prefix' => ,
+                // 'Prefix' => 'path/directory',
             ]);
         } catch (S3Client $e) {
             throw $e->getMessage();
