@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Sound;
 
 use App\Http\Controllers\Controller;
 use App\Services\GetDataServiceInterface;
-use AWS\CRT\HTTP\Request;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SoundApiController extends Controller
 {
@@ -17,14 +18,17 @@ class SoundApiController extends Controller
 
     public function getSound(Request $request)
     {
-        $sound = $this->getData->getSoundsData($request->path);
-        return response()->json($sound);
+        // 再生できるようにする
+        if (!Storage::exists($request->path)) {
+            $sound = $this->getData->getSoundsData($request->path)['Body'];
+            Storage::put($request->path, $sound);
+        }
+        return Storage::get($request->path);
     }
 
     public function getSoundList()
     {
         $data = $this->getData->getSoundList()['Contents'];
-        // dd($data);
         return $data;
     }
 }

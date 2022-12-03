@@ -5,41 +5,53 @@ sound page
 <br>
 <a href="/sound/add">add sound</a>
 
-<div class="sound_list">
-
+<div id="sound_list">
 </div>
-
-@endsection
 
 <script>
     window.onload = function() {
-        const aaa = getSoundList().then(data => {
-            console.log(data);
-        })
+        getSoundList().then(data => {
+            const sound_list = document.getElementById('sound_list');
+            data.forEach(item => {
+                let el = document.createElement('a');
+                el.innerHTML = item;
+                el.ref = "#";
+                el.className = 'sound';
+                el.dataset.sound = item;
+                console.log(sound_list);
+                sound_list.appendChild(el);
+            });
+        });
     };
+
+    const sound_list = document.getElementById('sound_list');
+    sound_list.addEventListener('click', (e) => {
+        playSound(e).then(data => {
+
+        });
+    });
 
     async function getSoundList() {
         const response = await fetch('/api/getSoundList');
         const json = await response.json();
-        const array = json.map(item => item.Key);
-
-        const soundlist = [];
-        array.forEach(item => {
-            // memo: ちゃんとしたaタグ作る
-            // let el = document.createElement('a');
-            // el.innerHTML = item.Key;
-            // el.className = 'sound'
-            // soundlist.push(el);
-        });
-        return soundlist;
+        return json.map(item => item.Key);
     }
 
+    async function playSound(e) {
+        const play_btn = document.querySelectorAll('.sound');
+        const path = e.target.dataset.sound;
+        const form = new FormData();
+        form.append('path', path);
 
-    // const play_btn = document.getElementById('play_btn');
-    // play_btn.addEventListener("click", () => {
-    //     // 音声パスを取得
-    //     // fetchAPIで/api/getSoundを実行し音声ファイルを取得する
-    //     let sound = new Audio();
-    //     sound.play();
-    // });
+        const response = await fetch('/api/getSound', {
+            method: "POST",
+            body: form
+        });
+        const json = await response.json();
+
+        let sound = new Audio(json);
+        sound.play();
+    }
 </script>
+
+@endsection
