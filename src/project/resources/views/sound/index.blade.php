@@ -26,8 +26,8 @@ sound page
     const sound_list = document.getElementById('sound_list');
     sound_list.addEventListener('click', (e) => {
         playSound(e).then(musicPath => {
-            let sound = new Audio(musicPath);
-            sound.play();
+            Play.src = musicPath;
+            Play.play();
         });
     });
 
@@ -50,6 +50,18 @@ sound page
         const json = await response.json();
         return json;
     }
+
+    let instance;
+    class PlayMusic extends Audio {
+        constructor() {
+            super();
+            if (instance != undefined) {
+                throw new Error("You can only create one instance!");
+            }
+            instance = this;
+        }
+    }
+    let Play = new PlayMusic();
 </script>
 
 @endsection
